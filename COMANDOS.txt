@@ -1,4 +1,6 @@
-#eliminar todas las im·genes
+#editamos en la rama master para hacer un fetch y un merge
+
+#eliminar todas las im√°genes
 docker rmi $(docker images -q)
 eliminar todos los contenedores
 docker rm $(docker ps -a -q)
@@ -12,24 +14,24 @@ docker-compose kill # Mata los contenedores
 docker-compose rm # Elimina los contenedores
 
 docker images # Lista las imagenes de docker
-docker image ls #lista de im·genes de docker
-docker container ls #lista de contenedores en ejecuciÛn
+docker image ls #lista de im√°genes de docker
+docker container ls #lista de contenedores en ejecuci√≥n
 docker container ls -a #lista de contenedores todos
-docker ps #contenedores en ejecuciÛn
+docker ps #contenedores en ejecuci√≥n
 docker ps -a #todos los contenedores 
 
 docker ps # Muestra los dockers corriendo
-docker inspect # InformaciÛn de un contenedor
+docker inspect # Informaci√≥n de un contenedor
 docker exec -ti NOMBREDELCONTENEDOR bash # Entrar en modo interactivo a un contenedor
 dockers stop NOMBREDELCONTENEDOR # Parar un contendor por el nombre
 dockers start NOMBREDELCONTENEDOR # Arrancar un contendor por el nombre
 docker kill $(docker ps -q)
 
 docker run -it alpine #ejecuta la imagen (convierte en contenedor) en modo interactivo
-docker run alpine -ls -l #ejeucuta y envÌa los comandos para su ejecuciÛn, no est· en modo interactivo, cuando ejectua los comandos el contenedor se apaga
+docker run alpine -ls -l #ejeucuta y env√≠a los comandos para su ejecuci√≥n, no est√° en modo interactivo, cuando ejectua los comandos el contenedor se apaga
 
 
-docker inspect alpine #caracterÌsticas de la imagen
+docker inspect alpine #caracter√≠sticas de la imagen
 
 docker container diff ID #DIferencias con el contenedor creado respecto de la imagen sobre la que se ha ejecutado o creado
 
@@ -38,11 +40,11 @@ docker container diff ID #DIferencias con el contenedor creado respecto de la im
 docker commit b886377896ab #creamos  una imagen de un contenedor
 docker image tag <IMAGE_ID> ourfiglet #damos nombre a una imagen
 
-pero podemos crearlas con un fichero dockerfile dando m·s informaciÛn a la imagen 
+pero podemos crearlas con un fichero dockerfile dando m√°s informaci√≥n a la imagen 
 
 editamos el dockerfile
 construimos la imagen con docker build -t nombre:tag
-hay que ejecutar esto en el directorio donde est· el dockerfile
+hay que ejecutar esto en el directorio donde est√° el dockerfile
 
 docker image history <image ID>
 lista de contenedores de imagen intermedios para crear la imagen id
