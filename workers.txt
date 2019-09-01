@@ -1,0 +1,23 @@
+
+habilitamos el modo swarm 
+docker swarm init --advertise-addr $(hostname -i)
+
+
+nos indica lo que hacer para unir a más máquinas como workers
+solo hemos de cambiar la ip por la de la máquina (la real) desde la máquina que queremos unir
+
+
+docker swarm join --token SWMTKN-1-4qjwoxbwrlnwv2inz19eg1eisqy1a9tn2cm9bixbfphjg9soe6-bugnt5yrbqikkl7uj0njnozkl 192.168.1.35:2377
+
+el administrador es el que puede ver los nodos
+docker node ls
+
+https://training.play-with-docker.com/ops-s1-swarm-intro/
+
+A stack is a group of services that are deployed together: multiple containerized components of 
+an application that run in separate instances. 
+Each individual service can actually be made up of one or more containers, 
+called tasks and then all the tasks & services together make up a stack.
+
+
+https://training.play-with-docker.com/ops-s1-swarm-intro/

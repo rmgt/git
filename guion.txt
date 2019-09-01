@@ -1,0 +1,167 @@
+instalar
+	apt update
+	apt install git
+
+configurar
+	git --global user.name "maria pepa"
+	git --global user.email "email@gmail.com"
+	git --global core.editor gedit
+para configuraciones locales habría que hacerlo sin la opción --global 
+
+
+comprobar la configuración
+	git config --list
+
+
+saber un dato
+	git config user.name
+
+
+inicializar un repositorio
+dentro del directorio en cuestión
+	git init
+pero los archivos están sin seguimiento hasta que los añadimos
+	git add <archivo-comodín-directorio>
+
+con git add también preparamos archivos (que hemos modificado)
+Es más útil que lo veas como un comando para “añadir este contenido a la 
+próxima confirmación” más que para “añadir este archivo al proyecto”
+
+sacar un archivo del "seguimiento"
+	git rm --cached <archivo>
+
+clonar un respositorio, esto crea un respositorio local e inicia git de forma automática
+se crea ya el directorio en cuestión, si ponemos nombre el directorio creado llevará ese nombre en lugar del que tiene 
+	git clone url <nombre>
+podemos descargar un proyecto de github en un zip pero no hará nada de lo anterior
+
+estado de los archivos 
+	git status
+nos indicará los que están bajo seguimiento y los que no, también los que han sido modificados para hacer commit
+
+
+estado abreviado
+	git status -s
+
+Los archivos nuevos que no están rastreados tienen un ?? a su lado, 
+los archivos que están preparados tienen una A y los modificados una M.
+El estado aparece en dos columnas - la columna de la izquierda indica el estado preparado y la columna de la 
+derecha indica el estado sin preparar. 
+
+Ignorar Archivos
+A veces, tendrás algún tipo de archivo que no quieres que Git añada automáticamente o más aun, que ni siquiera 
+quieras que aparezca como no rastreado. Este suele ser el caso de archivos generados automáticamente como trazas 
+o archivos creados por tu sistema de compilación. En estos casos, puedes crear un archivo llamado .gitignore que 
+liste patrones a considerar. Este es un ejemplo de un archivo .gitignore:
+
+$ cat .gitignore
+*.[oa]
+*~
+
+Para ver lo que ha cambiado en los ficheros 
+	git diff
+Es importante resaltar que al llamar a git diff sin parámetros no verás los cambios desde tu última confirmación - solo verás los cambios que aun no están preparados. Esto puede ser confuso 
+porque si preparas todos tus cambios, git diff no te devolverá ninguna salida.
+
+Si quieres ver lo que has preparado y será incluido en la próxima confirmación, 
+puedes usar git diff --staged git diff --cached (staged y cached son sinónimos)
+
+TENEMOS TODO PREPARADO, SI YA NO QUEREMOS HACER MÁS CAMBIOS PODEMOS CONFIRMAR
+
+	git commit
+se abrirá el editor que hemos configurado por defecto, el commit habrá que hacerlo como usuario de configuración global, no local
+nos pedirá que nos identifiquemos
+si hacemos 
+	git commit -v SE AÑADEN AL FICHERO los cambios que hemos hecho, como cuando hacemos 
+	git diff
+
+en el editor hemos de añadir un mensaje de commit en la primera linea, para eso la deja vacía
+que también podríamo hacer con 
+	git commit -m "mensaje"
+
+DESPUES DE UN COMMIT si no los modificamos no aparecerán en los listados....´
+no podremos hacer un commit si hay algún fichero en el area de preparación (hemos de hacer git add)
+
+Para evitar hacer este paso podemos saltarnos el área de preparación
+	git commit -a
+
+si borramos un archivo el git status lo pondrá como borrado en el área de preparados
+si lo borramos con git rm <archivo> aparecerá como borrado de la zona de preparados (aunque también desaparecerá del disco)
+si lo queremos mantener pero sacarlo del área de preparación, que no se rastree sin meterlo tampoco en el fichero .gitignore
+	git rm --cached <archivo>
+
+HISTORIAL DE CONFIRMACIONES
+	git log 
+
+	git log --stat añade más información en cada uno de los commits realizados
+Hay un montón de modificadores en git log
+Sin embargo, las opciones temporales como --since (desde) y --until (hasta) sí que resultan muy útiles. Por ejemplo, este comando lista todas las confirmaciones hechas durante las dos últimas semanas:
+
+	git log --since=2.weeks
+Para más info ir a https://git-scm.com/book/es/v2/Fundamentos-de-Git-Ver-el-Historial-de-Confirmaciones
+Una de las opciones más útiles es -p, que muestra las diferencias introducidas en cada confirmación. 
+También puedes usar la opción -2, 
+que hace que se muestren únicamente las dos últimas entradas del historial
+Cuando hacemos un log en un clon nos mostrará todos los commits y esperará al final 
+de la pantalla con : para que demos enter y siga, podemos cancelar con ctrl+z
+
+
+
+resetear, saca de la zona de preparación un archivo
+	git reset <archivo>
+
+
+DESHACER CAMBIOS
+	git commit --amend //cambiar el mensaje del último commit, en el log aparecerá con el nuevo mensaje, no aparecen dos commit
+También se pueden cambiar los archivos del último commit con --amend, pero antes habrá que hacer el add o rm oportunos
+
+
+Sacar del área de preparados ya lo vimos, con git reset <archivo>, se puede indicar la rama, por defecto es HEAD
+
+Deshacer un archivo modificado, al hacer git status nos lo dice
+
+	git checkout <archivo> git checkout -- <archivo>
+
+REMOTOS
+Colaborar con otras personas implica gestionar estos repositorios remotos enviando y trayendo datos de ellos 
+cada vez que necesites compartir tu trabajo.
+VER GITS remotos
+dentro de un directorio que haya sido clonado desde otro sitio
+	git remote
+para ver las url's asociadas y que van a ser usadas para leer y escribir
+	git remote -v
+
+Añadir repositorios remotos
+	entro en el directorio
+	git remote add <nombre> <url>
+
+ahora podría hacer un fetch o push usando su nombre en lugar de la url completa...
+	git fetch <nombre>
+con fetch obtenemos datos de un repositorio remoto, traerá todos los datos que todavía no tenemos del repositorio
+cuando se clona un repositorio se añade un remoto llamado origin de forma automática de forma que para traer datos nuevos de ese repositorio en su servidor
+desde la última vez que se clonó o modificó hay que hacer fetch
+
+lo anterior no modifica tu trabajo en local ni se combina con él, eso hay que hacerlo de forma manual
+Para ver más información acerca de un remoto
+	git remote show [nombre]
+
+renombrar y borrar remotos
+	git remote rename antiguo nombre
+	git remote rm nombre
+
+inicio un repositorio en github para ir probando estas cosillas
+el proyecto está en rmgt/git
+le subo algunos ficheros desde la solapa <>code, el README lo crea él con la descripción del proyecto
+
+
+
+
+para trabajar con esos repositorios hay que crear ramas locales....
+	git branch testing
+	git branch //me dice la rama en la que estoy
+
+cambiamos de rama
+	git checkout testing	
+
+ 
+
