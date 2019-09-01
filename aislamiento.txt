@@ -1,0 +1,22 @@
+A PESAR DE EJECUTARSE SOBRE LA MISMA IMAGEN
+
+al ejecutar un contenedor
+creamos ficheros o cambiamos cosas dentro
+salimos
+volvemos a él y todo se ha esfumado
+
+ESTO OCURRE PORQUE SE EJECUTAN EN INSTANCIAS INDEPENDIENTES
+
+al salir podemos ver todos los contenedores que hemos instanciado desde alpine
+si hacemo 
+docker container start ID-CONTENEDOR
+
+será el que esté ejecutándose, aquel en el que hicimos los cambios
+
+al estar en ejecución podemos enviarle un comando con exec , siempre que el contenedor
+ haya tenido un comando como /bin/ash que está esperando... si lo hubiéramos arrancado 
+con un comnado como ls el contenedor lo ejecuta y sale, no queda a la espera
+
+docker container exec <container ID> ls
+
+el fichero que habíamos creado antes en ese contenedor está en él. 
