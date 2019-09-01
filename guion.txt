@@ -1,3 +1,5 @@
+este fichero está un un repositorio de github para pruebas
+
 instalar
 	apt update
 	apt install git
